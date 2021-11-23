@@ -1,0 +1,68 @@
+@font-face {
+	font-family: "icons";
+	src: url('/fonts/./dist/fonts/fontIcons/icons.eot');
+	src: url('/fonts/./dist/fonts/fontIcons/icons.eot?#iefix') format('eot'),
+		url('/fonts/./dist/fonts/fontIcons/icons.woff2') format('woff2'),
+		url('/fonts/./dist/fonts/fontIcons/icons.woff') format('woff'),
+		url('/fonts/./dist/fonts/fontIcons/icons.ttf') format('truetype'),
+		url('/fonts/./dist/fonts/fontIcons/icons.svg#icons') format('svg');
+}
+
+@mixin icon-styles {
+	font-family: "icons";
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	// speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+	text-decoration: none;
+	text-transform: none;
+}
+
+%icon {
+	@include icon-styles;
+}
+
+@function icon-char($filename) {
+	$char: "";
+
+	@if $filename == cup {
+		$char: "\E001";
+	}
+	@if $filename == fb {
+		$char: "\E002";
+	}
+	@if $filename == phone {
+		$char: "\E003";
+	}
+	@if $filename == search {
+		$char: "\E004";
+	}
+
+	@return $char;
+}
+
+@mixin icon($filename, $insert: before, $extend: true) {
+	&:#{$insert} {
+		@if $extend {
+			@extend %icon;
+		} @else {
+			@include icon-styles;
+		}
+		content: icon-char($filename);
+	}
+}
+
+.icon-cup {
+	@include icon(cup);
+}
+.icon-fb {
+	@include icon(fb);
+}
+.icon-phone {
+	@include icon(phone);
+}
+.icon-search {
+	@include icon(search);
+}

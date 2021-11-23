@@ -1,0 +1,33 @@
+ .text {
+  &-small {
+    font-size: 14px;
+  }
+
+  &-big {
+    font-size: 18px;
+  }
+
+  &-bold {
+    font-weight: $bold;
+  }
+  
+  &-light {
+    font-weight: $light;
+  }
+  
+  &-italic {
+    font-style: italic;
+  }
+
+  &-center {
+    text-align: center;
+  }
+
+  &-nowrap {
+    white-space: nowrap;
+  }
+
+  &-uppercase {
+    text-transform: uppercase;
+  }
+}

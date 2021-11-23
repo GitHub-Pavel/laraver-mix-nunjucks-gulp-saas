@@ -1,0 +1,61 @@
+/*
+ * ==================================================================================
+ * font
+ * ==================================================================================
+ */
+
+@mixin font($font_name, $file_name, $weight, $style) {
+    @font-face {
+        font-family: $font_name;
+        font-display: swap;
+        src: url("../../dist/fonts/#{$file_name}.eot");
+        src: local($font_name),
+             local($file_name),
+             url('../../dist/fonts/#{$file_name}.woff2') format('woff2'),
+             url('../../dist/fonts/#{$file_name}.woff') format('woff'),
+             url('../../dist/fonts/#{$file_name}.eot?#iefix') format('eot'),
+             url('../../dist/fonts/#{$file_name}.ttf') format('truetype');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+/*
+ * ==================================================================================
+ * fancybox
+ * ==================================================================================
+ */
+
+@function max($numbers...) {
+    @return m#{a}x(#{$numbers});
+}
+
+@function min($numbers...) {
+    @return m#{i}n(#{$numbers});
+}
+
+/*
+ * ==================================================================================
+ * Grid columns
+ * ==================================================================================
+ */
+
+@mixin grid($screens) {
+    $colArray: 1,2,3,4,6,12;
+
+    @each $screen in $screens {
+        @each $columns in $colArray {
+            @if $screen == 'none' {
+                &--#{$columns} {
+                    grid-template-columns: repeat($columns, 1fr);
+                }
+            }
+            @else {
+                &--#{$screen}-#{$columns} {
+                    @media (max-width: var(--#{$screen})) {
+                        grid-template-columns: repeat($columns, 1fr);
+                    }
+                }
+            }
+        }
+    }
+}
